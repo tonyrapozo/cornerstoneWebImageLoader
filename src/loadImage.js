@@ -12,12 +12,17 @@ let options = {
 
 
 // Loads an image given a url to an image
-export function loadImage (imageId) {
+export function loadImage (imageId, sendOptions) {
   const cornerstone = external.cornerstone;
 
   const xhr = new XMLHttpRequest();
 
-  xhr.open('GET', imageId, true);
+  let urlToCall = imageId;
+  if (sendOptions){
+    urlToCall += `&windowWidth=${sendOptions.windowWidth}&windowCenter=${sendOptions.windowCenter}`
+  }
+
+  xhr.open('GET', urlToCall, true);
   xhr.responseType = 'arraybuffer';
   options.beforeSend(xhr);
 

@@ -1,6 +1,6 @@
 {
-  "name": "cornerstone-web-image-loader",
-  "version": "2.1.0",
+  "name": "mv-cornerstone-web-image-loader",
+  "version": "2.1.3",
   "description": "Cornerstone ImageLoader for Web Images (PNG, JPG)",
   "keywords": [
     "medical",
@@ -10,15 +10,15 @@
     "cornerstone"
   ],
   "author": "Chris Hafey",
-  "homepage": "https://github.com/cornerstonejs/cornerstoneWebImageLoader",
+  "homepage": "https://github.com/tonyrapozo/cornerstoneWebImageLoader",
   "license": "MIT",
   "main": "./dist/cornerstoneWebImageLoader.min.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cornerstonejs/cornerstoneWebImageLoader.git"
+    "url": "https://github.com/tonyrapozo/cornerstoneWebImageLoader"
   },
   "scripts": {
-    "build": "npm run test && npm run version && npm run webpack && npm run doc:generate",
+    "build": "npm run version && npm run webpack && npm run doc:generate",
     "clean": "npm run clean:dist && npm run clean:coverage",
     "clean:dist": "shx rm -rf dist",
     "clean:docs": "shx rm -rf documentation",
@@ -40,7 +40,8 @@
     "webpack": "npm run webpack:prod && npm run webpack:dev",
     "webpack:dev": "webpack --progress --config ./config/webpack/webpack-dev",
     "webpack:prod": "webpack --progress --config ./config/webpack/webpack-prod",
-    "webpack:watch": "webpack --progress --debug --watch  --config ./config/webpack"
+    "webpack:watch": "webpack --progress --debug --watch  --config ./config/webpack",
+    "prepublish": "npm run build"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

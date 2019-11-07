@@ -17,8 +17,6 @@ export default function (image, imageId) {
 
   function getPixelData () {
     const imageData = getImageData();
-
-
     return imageData.data;
   }
 
@@ -28,14 +26,14 @@ export default function (image, imageId) {
     if (lastImageIdDrawn === imageId) {
       context = canvas.getContext('2d');
     } else {
-      canvas.height = image.naturalHeight;
-      canvas.width = image.naturalWidth;
+      canvas.height = rows;
+      canvas.width = columns;
       context = canvas.getContext('2d');
-      context.drawImage(image, 0, 0);
+      context.drawImage(image, 0, 0, canvas.width, canvas.height);
       lastImageIdDrawn = imageId;
     }
 
-    return context.getImageData(0, 0, image.naturalWidth, image.naturalHeight);
+    return context.getImageData(0, 0, rows, columns);
   }
 
   function getCanvas () {
@@ -43,8 +41,8 @@ export default function (image, imageId) {
       return canvas;
     }
 
-    canvas.height = image.naturalHeight;
-    canvas.width = image.naturalWidth;
+    canvas.height = rows;
+    canvas.width = columns;
     const context = canvas.getContext('2d');
 
     context.drawImage(image, 0, 0);

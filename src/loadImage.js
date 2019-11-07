@@ -7,23 +7,27 @@ import createImage from './createImage.js';
 //
 let options = {
   // callback allowing customization of the xhr (e.g. adding custom auth headers, cors, etc)
-  beforeSend (/* xhr */) {}
+  beforeSend(/* xhr */) { }
 };
 
 
 // Loads an image given a url to an image
-export function loadImage (imageId, sendOptions) {
+export function loadImage(imageId, sendOptions) {
   const cornerstone = external.cornerstone;
 
   const xhr = new XMLHttpRequest();
 
   let urlToCall = imageId;
-  if (sendOptions){
+  if (sendOptions && !isNaN(sendOptions.windowWidth) && !isNaN(sendOptions.windowCenter)) {
     urlToCall += `&windowWidth=${sendOptions.windowWidth}&windowCenter=${sendOptions.windowCenter}`
   }
 
+  const jwtToken = localStorage.getItem('jwt');
+
   xhr.open('GET', urlToCall, true);
   xhr.responseType = 'arraybuffer';
+  if (jwtToken)
+    xhr.setRequestHeader('Authorization', 'Bearer ' + jwtToken)
   options.beforeSend(xhr);
 
   xhr.onprogress = function (oProgress) {
@@ -69,6 +73,6 @@ export function loadImage (imageId, sendOptions) {
   };
 }
 
-export function configure (opts) {
+export function configure(opts) {
   options = opts;
 }
